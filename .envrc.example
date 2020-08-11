@@ -1,0 +1,2 @@
+export CHANNEL_ACCESS_TOKEN='****************'
+export CHANNEL_SECRET='********'

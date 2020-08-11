@@ -3,6 +3,9 @@ version: '3'
 services: 
   flask:
     build: ./flask
+    environment:
+      CHANNEL_ACCESS_TOKEN: $CHANNEL_ACCESS_TOKEN
+      CHANNEL_SECRET: $CHANNEL_SECRET
     ports: 
       - '5000:5000'
     volumes:
