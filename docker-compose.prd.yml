@@ -8,10 +8,17 @@ services:
       - ./cron/crontabs:/var/spool/cron/crontabs
   flask:
     build: ./flask
+    command: uwsgi --socket 0.0.0.0:3031 --chdir /app --wsgi-file main.py --callable app --master --processes 4 --threads 2
     environment:
       CHANNEL_ACCESS_TOKEN: $CHANNEL_ACCESS_TOKEN
       CHANNEL_SECRET: $CHANNEL_SECRET
-    ports: 
-      - '5000:5000'
     volumes:
       - ./flask/app:/app
+  nginx:
+    image: nginx:latest
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    depends_on:
+      - flask

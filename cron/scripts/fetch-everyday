@@ -1,0 +1,3 @@
+#!/bin/sh
+
+curl http://nginx/_everyday
