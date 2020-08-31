@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 import os
 import json
 
-from modules.holiday import what_day_is, get_holidays_in_this_month
+from modules.holiday import what_day_is, get_holidays_in_this_month, get_next_holiday
 from modules.utils import key_to_date
 
 app = Flask(__name__)
@@ -91,6 +91,14 @@ def handle_message(event):
       reply_text += "\nです"
     else:
       reply_text += "ありません"
+      
+  elif "次の祝日" in recieved_text:
+    holiday = get_next_holiday(datetime.now())
+    reply_text = "次の祝日は"
+    if holiday is not None:
+      reply_text += "\n" + date.strftime("%m月%d日") + " の " + name + "\nです"
+    else:
+      return
 
   else:
     return

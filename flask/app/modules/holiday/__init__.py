@@ -47,3 +47,10 @@ def get_holidays_in_this_month(date: datetime):
         name
       ))
   return ret
+
+def get_next_holiday(date: datetime):
+  for key, name in get_holidays().items():
+    holiday = key_to_date(key)
+    if holiday > date.date():
+      return (holiday, name)
+  return None
