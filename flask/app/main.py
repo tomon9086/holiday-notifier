@@ -66,7 +66,7 @@ def handle_message(event):
   recieved_text = event.message.text
   reply_text = "🙂"
 
-  if "今日" in recieved_text:
+  if "今日" in recieved_text and "祝日" in recieved_text:
     holiday_name = what_day_is(datetime.now())
     reply_text = "今日は"
     if holiday_name is not None:
@@ -74,7 +74,15 @@ def handle_message(event):
     else:
       reply_text += "祝日ではありません"
       
-  elif "今月" in recieved_text:
+  elif "明日" in recieved_text and "祝日" in recieved_text:
+    holiday_name = what_day_is(datetime.now() + timedelta(1))
+    reply_text = "明日は"
+    if holiday_name is not None:
+      reply_text += holiday_name + "です"
+    else:
+      reply_text += "祝日ではありません"
+      
+  elif "今月" in recieved_text and "祝日" in recieved_text:
     holidays = get_holidays_in_this_month(datetime.now())
     reply_text = "今月の祝日は"
     if len(holidays) > 0:
@@ -83,6 +91,9 @@ def handle_message(event):
       reply_text += "\nです"
     else:
       reply_text += "ありません"
+
+  else:
+    return
 
   line_bot_api.reply_message(
     event.reply_token,
