@@ -94,6 +94,8 @@ def handle_message(event):
       
   elif "次の祝日" in recieved_text:
     holiday = get_next_holiday(datetime.now())
+    date = holiday[0]
+    name = holiday[1]
     reply_text = "次の祝日は"
     if holiday is not None:
       reply_text += "\n" + date.strftime("%m月%d日") + " の " + name + "\nです"
