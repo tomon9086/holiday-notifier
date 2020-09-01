@@ -22,3 +22,11 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
     depends_on:
       - flask
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.24.0.0/16
