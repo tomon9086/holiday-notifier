@@ -1,3 +1,5 @@
 #!/bin/sh
 
-curl http://nginx/_everyday
+curl -f http://nginx/_everyday
+
+curl -X POST -H "Content-Type: application/json" -d "{\"username\": \"debug\", \"content\": \"prev exit code: $(echo $?)\"}" https://discord.com/api/webhooks/795524762724991016/8zx6IvO1zI2HLhYYJQjFUqI_n6VEBjGtc5PxM8PHPx82hU9ulCiKF8CW1C8builvC5jX
