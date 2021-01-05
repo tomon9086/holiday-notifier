@@ -5,7 +5,6 @@ services:
     build: ./cron
     volumes:
       - ./cron/scripts:/scripts
-      - ./cron/crontabs:/var/spool/cron/crontabs
   flask:
     build: ./flask
     environment:

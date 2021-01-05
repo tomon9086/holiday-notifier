@@ -7,4 +7,7 @@ RUN apk --update add tzdata && \
 
 RUN apk add curl
 
+COPY crontabs/* /var/spool/cron/crontabs/
+RUN chmod 600 /var/spool/cron/crontabs/*
+
 CMD crond -l 2 -f
