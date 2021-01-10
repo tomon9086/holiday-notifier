@@ -32,10 +32,10 @@ def everyday():
     else:
       text += "ありません"
     line_bot_api.broadcast(TextSendMessage(text=text))
-    
+  else:
     holiday_name = what_day_is(today + timedelta(1))
-    text = "明日は"
     if holiday_name is not None:
+      text = "明日は"
       text += holiday_name + "です"
       line_bot_api.broadcast(TextSendMessage(text=text))
       
