@@ -43,8 +43,8 @@ export const getHolidaysInThisMonth = async (date: Date): Promise<Holiday[]> => 
   return holidays.filter((holiday) => dateInMonth(holiday.date, date))
 }
 
-export const getNextHoliday = async (date: Date): Promise<string | undefined> => {
+export const getNextHoliday = async (date: Date): Promise<Holiday | undefined> => {
   const holidays = await getHolidays()
   const futureHolidays = holidays.filter((holiday) => +holiday.date > +date)
-  return futureHolidays.length ? futureHolidays[0].text : undefined
+  return futureHolidays.length ? futureHolidays[0] : undefined
 }
