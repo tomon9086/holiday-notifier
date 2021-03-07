@@ -1,0 +1,25 @@
+name: Deploy to Firebase Functions on merge
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'functions/**'
+
+defaults:
+  run:
+    working-directory: functions
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
+      - run: npm run build
+      - uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only functions
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT_ID: holiday-notifier-306909
