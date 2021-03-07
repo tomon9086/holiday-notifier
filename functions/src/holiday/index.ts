@@ -1,5 +1,6 @@
-import { compareDate, dateInMonth } from '@/utils'
 import { DateTime } from 'luxon'
+import axios from '@/request'
+import { compareDate, dateInMonth } from '@/utils'
 
 const url = 'https://holidays-jp.github.io/api/v1/date.json'
 
@@ -13,9 +14,9 @@ export const getHolidays = async (): Promise<Holiday[]> => {
 }
 
 export const fetchHolidays = async (): Promise<Holiday[]> => {
-  return await fetch(url)
-    .then((res) => res.json())
-    .then((json: {[key: string]: string}) => {
+  return await axios.get<{[key: string]: string}>(url)
+    .then((res) => res.data)
+    .then((json) => {
       const holidays: Holiday[] = []
       for (const key in json) {
         const dt = DateTime.fromFormat(key, 'yyyy-MM-dd')
